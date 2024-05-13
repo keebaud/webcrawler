@@ -1,0 +1,24 @@
+{
+  "name": "webcrawler",
+  "version": "1.0.0",
+  "description": "Web Crawler Project from BOOT.DEV",
+  "main": "index.js",
+  "type": "modules",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keebaud/webcrawler.git"
+  },
+  "keywords": [
+    "webcrawler",
+    "node"
+  ],
+  "author": "Barry Tabrah",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keebaud/webcrawler/issues"
+  },
+  "homepage": "https://github.com/keebaud/webcrawler#readme"
+}
