@@ -75,8 +75,7 @@ async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
   // Get all valid URLs from htmlBody
   const validURLS = getURLsFromHTML(htmlBody, baseURL);
   for (const validURL of validURLS) {
-    pages = crawlPage(baseURL, validURL, pages);
-    console.log(pages)
+    pages = await crawlPage(baseURL, validURL, pages);
   }
   // Return a list of pages
   return pages;
