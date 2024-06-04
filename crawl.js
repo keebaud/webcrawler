@@ -32,30 +32,27 @@ async function getCurrentHTML(currentURL) {
   try {
     const response = await fetch(currentURL);
     if (response.status >= 400) {
-      // console.log(`Website response code: ${response.status}`);
+      console.log(`Website response code: ${response.status}`);
       return;
     }
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('text/html')) {
-      // console.log('Content Type does not include text/html');
+      console.log('Content Type does not include text/html');
       return;
     }
 
     const htmlBody = await response.text();
     return htmlBody;
   } catch (error) {
-    // console.log(`Error: ${error.message}`)
+    console.log(`Error: ${error.message}`)
   }
 }
 
 async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
-
-  // Make sure the currentURL is on the same domain as the baseURL
-  const url = new URL(currentURL);
-  // Get Normalized Current URL
-  const normalCurrentURL = normalizeURL(`${url.protocol}//${url.hostname}`);
-  const normalBaseURL = normalizeURL(baseURL);
-  if (normalCurrentURL !== normalBaseURL) {
+  // Make sure the currentURL is on the same host as the baseURL
+  const checkBaseURL = new URL(baseURL);
+  const checkCurrentURL = new URL(currentURL);
+  if (checkBaseURL.hostname !== checkCurrentURL.hostname) {
     return pages;
   }
 
@@ -79,9 +76,10 @@ async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
   const validURLS = getURLsFromHTML(htmlBody, baseURL);
   for (const validURL of validURLS) {
     pages = crawlPage(baseURL, validURL, pages);
+    console.log(pages)
   }
   // Return a list of pages
-  return pages
+  return pages;
 }
 
 export { normalizeURL, getURLsFromHTML, crawlPage };
