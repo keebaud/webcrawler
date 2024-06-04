@@ -1,4 +1,4 @@
-import { crawlPage } from "./crawl.js";
+import { crawlPage, printReport } from "./crawl.js";
 
 async function main() {
     if (process.argv.length < 3) {
@@ -12,7 +12,7 @@ async function main() {
     const baseURL = process.argv[2];
     console.log(`Starting crawler at base URL: ${baseURL}`);
     const pages = await crawlPage(baseURL);
-    console.log(pages);
+    printReport(pages);
 }
 
 main()

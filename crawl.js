@@ -81,4 +81,18 @@ async function crawlPage(baseURL, currentURL = baseURL, pages = {}) {
   return pages;
 }
 
-export { normalizeURL, getURLsFromHTML, crawlPage };
+function printReport(pages) {
+  console.log('Printing report...');
+  const pagesArray = Object.entries(pages).sort((a,b) => b[1] - a[1]);
+  for (const page of pagesArray) {
+    const url = page[0];
+    const count = page[1];
+    if (count != 1) {
+      console.log(`Found ${count} internal links to ${url}`);
+    } else {
+      console.log(`Found ${count} internal link to ${url}`);
+    }
+  }
+}
+
+export { normalizeURL, getURLsFromHTML, crawlPage, printReport };
